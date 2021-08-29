@@ -4,7 +4,7 @@ import pprint
 
 from bs4 import BeautifulSoup
 from lms import _LOG as log
-from lms._settings import *
+import lms._settings as settings
 
 try:  # JUST FOR DEBUG
     from lms._own_info import *
@@ -19,14 +19,14 @@ class GetSession:
         log('debug', 'session.GetSession.__init__', str(id(self.session)))
 
     def _login(self) -> bool:
-        if USER_INFO['usr_id'] is None:     # FOR DEBUG
-            USER_INFO['usr_id'] = USR_ID
+        if settings.USER_INFO['usr_id'] is None:     # FOR DEBUG
+            settings.USER_INFO['usr_id'] = USR_ID
 
         if USER_INFO['usr_pwd'] is None:
             USER_INFO['usr_pwd'] = USR_PW
 
         log('info', 'session.GetSession.__init__', 'login start')
-        res = self.session.post(LOGIN_URL, data=USER_INFO)
+        res = self.session.post(settings.LOGIN_URL, data=USER_INFO)
 
         if res.status_code == 200:
             log('info', 'session.GetSession.__init__', 'login success!')
