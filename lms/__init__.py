@@ -15,20 +15,20 @@ logger.addHandler(stream_handler)
 def _LOG(msgtype, sender, msg):
     if msgtype == 'debug':
         logger.setLevel(logging.DEBUG)
-        logger.debug(f'from{sender}, {msg}')
+        logger.debug(f'from [{sender}], {msg}')
 
     elif msgtype == 'info':
         logger.setLevel(logging.INFO)
-        logger.info(f'from{sender}, {msg}')
+        logger.info(f'from [{sender}], {msg}')
 
     elif msgtype == 'warning':
         logger.setLevel(logging.WARNING)
-        logger.warning(f'from{sender}, {msg}')
+        logger.warning(f'from [{sender}], {msg}')
 
     elif msgtype == 'error':
         logger.setLevel(logging.ERROR)
-        logger.error(f'from{sender}, {msg}')
+        logger.error(f'from [{sender}], {msg}')
 
     else:
         logger.setLevel(logging.WARNING)
-        logger.warning(f'from{sender}, MSGTYPE does not exist')
+        logger.warning(f'from [{sender}], MSGTYPE does not exist')
