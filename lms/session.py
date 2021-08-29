@@ -7,7 +7,7 @@ from lms import _LOG as log
 import lms._settings as settings
 
 try:  # JUST FOR DEBUG
-    from lms._own_info import *
+    from __own import Account as acc
 
 except ImportError:
     pass
@@ -20,13 +20,13 @@ class GetSession:
 
     def _login(self) -> bool:
         if settings.USER_INFO['usr_id'] is None:     # FOR DEBUG
-            settings.USER_INFO['usr_id'] = USR_ID
+            settings.USER_INFO['usr_id'] = acc.UID
 
-        if USER_INFO['usr_pwd'] is None:
-            USER_INFO['usr_pwd'] = USR_PW
+        if settings.USER_INFO['usr_pwd'] is None:
+            settings.USER_INFO['usr_pwd'] = acc.PWD
 
         log('info', 'session.GetSession.__init__', 'login start')
-        res = self.session.post(settings.LOGIN_URL, data=USER_INFO)
+        res = self.session.post(settings.LOGIN_URL, data=settings.USER_INFO)
 
         if res.status_code == 200:
             log('info', 'session.GetSession.__init__', 'login success!')
