@@ -16,7 +16,8 @@ except ImportError:
 class GetSession:
     def __init__(self):
         self.session = requests.Session()
-        log('debug', 'session.GetSession.__init__', str(id(self.session)))
+        log('debug', 'session.GetSession.__init__', f'SESSION ID : {str(id(self.session))}')
+        self._login()
 
     def _login(self) -> bool:
         if settings.USER_INFO['usr_id'] is None:     # FOR DEBUG
@@ -36,6 +37,32 @@ class GetSession:
             return False
 
 
+class GetUserInfo:
+    def __init__(self, session:requests.Session):
+        self.session = session
+
+    def getInfo(self):
+        try:
+            html = self.session.get(settings.USER_INFO_URL)
+            soup = BeautifulSoup(html.text, 'html.parser')
+            user_email = soup.find("div", {'style': 'width: 200px; float: left; overflow: hidden;'}).get_text().replace(
+                u'\xa0', u'')
+            user_name = soup.select_one("#user").text
+            user_code = (soup.find("tr", {'style': 'height: 40px; vertical-align: middle;'}).
+                         find_all("td")[1].text)[(soup.find("tr", {'style': 'height: 40px; vertical-align: middle;'}).
+                                                  find_all("td")[1].text).find('(') + 1:(soup.find("tr", {
+                'style': 'height: 40px; vertical-align: middle;'}).
+                                                                                         find_all("td")[1].text).find(
+                ')')]  # 학번
+
+            return user_name, user_code, user_email
+
+        except Exception as e:
+            log('error', 'session.GetUserInfo.getInfo',f'Exception {e}')
+            return None
+
+
 if __name__ == "__main__":
     login = GetSession()
-    login._login()
+    info = GetUserInfo(login.session).getInfo()    #아래와같이 사용할것
+    print(info)
