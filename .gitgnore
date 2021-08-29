@@ -217,5 +217,5 @@ fabric.properties
 # CodeStream plugin
 # https://plugins.jetbrains.com/plugin/12206-codestream
 .idea/codestream.xml
-
+/__own/*
 # End of https://www.toptal.com/developers/gitignore/api/pycharm
