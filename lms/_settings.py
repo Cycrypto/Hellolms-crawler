@@ -1,10 +1,12 @@
 ### SITE ###
-MAIN_URL = 'http://eclass.kpu.ac.kr/ilos/main/main_form.acl'
-AUTH_CHECK_URL = 'http://eclass.kpu.ac.kr/ilos/co/st_session_room_auth_check.acl'
+MAIN_URL = r'http://eclass.kpu.ac.kr/ilos/main/main_form.acl'
+AUTH_CHECK_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/eclass_room2.acl'
+SUBMAIN_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/submain_form.acl'
+CURRENT = SUBMAIN_URL
 
 ### SESSION ###
-LOGIN_URL = 'https://eclass.kpu.ac.kr/ilos/lo/login.acl'
-USER_INFO_URL = 'http://eclass.kpu.ac.kr/ilos/mp/myinfo_form.acl'
+LOGIN_URL = r'https://eclass.kpu.ac.kr/ilos/lo/login.acl'
+USER_INFO_URL = r'http://eclass.kpu.ac.kr/ilos/mp/myinfo_form.acl'
 
 USER_INFO = {
     'usr_id': None,
@@ -12,9 +14,11 @@ USER_INFO = {
 }
 
 ### LECTURE ###
-AUTH_FORM = lambda uid, lc_key: {
-            'ud': uid,
-            'ky': lc_key
+AUTH_FORM = lambda KJKEY: {
+             'KJKEY' : KJKEY,
+             'returnData' : "json",
+             'returnURI' : "/ilos/st/course/submain_form.acl",
+             'encoding' : "utf-8"
 }
 
 HEADER = lambda referer: {
@@ -22,4 +26,4 @@ HEADER = lambda referer: {
     'Referer': referer
 }
 
-INFORM_URL = 'http://eclass.kpu.ac.kr/ilos/st/course/notice_list.acl'
+INFORM_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/notice_list.acl'
