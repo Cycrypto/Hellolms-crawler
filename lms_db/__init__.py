@@ -1,14 +1,20 @@
 import os
 import logging
 import sqlite3
+from pandas import read_sql
 
 ### BASIC CONSTANT ###
 _DIR = os.path.abspath("../")
 DB_NAME = "test"
-DB_PATH = _DIR + "/" + DB_NAME
+DB_PATH = _DIR + "/" + DB_NAME+".db"
 
-### GET DB INFO ###
 CONN = sqlite3.connect(DB_PATH)
+CURSOR = CONN.cursor()
+_FILE = False
+
+if os.path.isfile(DB_PATH):
+    _FILE = True
+
 
 ### LOGGER ###
 logger = logging.getLogger()
