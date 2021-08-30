@@ -1,8 +1,16 @@
 import os
 import logging
+import sqlite3
 
-_DIR = os.path.abspath(os.path.dirname(__file__))
+### BASIC CONSTANT ###
+_DIR = os.path.abspath("../")
+DB_NAME = "test"
+DB_PATH = _DIR + "/" + DB_NAME
 
+### GET DB INFO ###
+CONN = sqlite3.connect(DB_PATH)
+
+### LOGGER ###
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 formatter = logging.Formatter('[%(levelname)s] - %(message)s')
