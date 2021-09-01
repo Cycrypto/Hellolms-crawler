@@ -14,7 +14,7 @@ class Lecture:
         self.subject = {}
         log('debug', Lecture.__name__, f'SESSION ID : {id(self.session)}')
 
-    def getLectureList(self):
+    def getLectureList(self) -> None:
         url = settings.MAIN_URL     # 메인화면에 나와있는 과목명을 파싱할 예정
         req = self.session.get(url)
         soup = BeautifulSoup(req.text, 'html.parser')
@@ -44,7 +44,6 @@ class SubjectInfo(Lecture):
 
         if any(self.subject) is False:  # 만약 subject 가 크롤링되지 않았다면 크롤링 실행
             self.getLectureList()
-            print(self.subject)
 
         log('debug', SubjectInfo.getInformation.__name__, f"Go Classroom {class_name}")
         self.session.post(settings.AUTH_CHECK_URL, headers=settings.HEADER(ref),
