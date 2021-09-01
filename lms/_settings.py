@@ -26,4 +26,17 @@ HEADER = lambda referer: {
     'Referer': referer
 }
 
+FILE_DOWNLOAD_FORM = lambda ud, ky, seq: {
+    'ud': ud,
+    'ky': ky,
+    'CONTENT_SEQ': seq,
+    'pf_st_flag': 2,
+    'encoding': 'UTF-8'
+}
+
 INFORM_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/notice_list.acl'
+CLASS_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/online_list_form.acl'
+PLANNER_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/plan_form.acl'
+METERIAL_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/lecture_material_list.acl'
+HOMEWORK_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/report_list.acl'
+TEAMPJ_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/project_list.acl'
