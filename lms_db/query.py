@@ -44,5 +44,6 @@ class Query:
 if __name__ == "__main__":
     q = Query()
     # q.createTable("c", 'Date text', 'Open int', 'High int', 'Low int', 'Closing int', 'Volumn int')
-    q.insertData("c", '\"16.06.03\"', '97000', '98600', '96900', '98000', '10400')
-    q.deleteTable("c")
+    # q.insertData("c", '\"16.06.03\"', '97000', '98600', '96900', '98000', '10400')
+    print(q.joinString("*"))
+    # q.deleteTable("c")
