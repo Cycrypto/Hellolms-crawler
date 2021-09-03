@@ -15,10 +15,10 @@ USER_INFO = {
 
 ### LECTURE ###
 AUTH_FORM = lambda KJKEY: {
-             'KJKEY' : KJKEY,
-             'returnData' : "json",
-             'returnURI' : "/ilos/st/course/submain_form.acl",
-             'encoding' : "utf-8"
+             'KJKEY': KJKEY,
+             'returnData': "json",
+             'returnURI': "/ilos/st/course/submain_form.acl",
+             'encoding': "utf-8"
 }
 
 HEADER = lambda referer: {

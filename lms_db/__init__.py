@@ -17,6 +17,7 @@ if os.path.isfile(DB_PATH):
 
 
 ### LOGGER ###
+_DEBUG = False
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 formatter = logging.Formatter('[%(levelname)s] - %(message)s')
@@ -27,22 +28,25 @@ logger.addHandler(stream_handler)
 
 
 def _LOG(msgtype, sender, msg):
-    if msgtype == 'debug':
-        logger.setLevel(logging.DEBUG)
-        logger.debug(f'from [{sender}], {msg}')
-
-    elif msgtype == 'info':
-        logger.setLevel(logging.INFO)
-        logger.info(f'from [{sender}], {msg}')
-
-    elif msgtype == 'warning':
-        logger.setLevel(logging.WARNING)
-        logger.warning(f'from [{sender}], {msg}')
-
-    elif msgtype == 'error':
-        logger.setLevel(logging.ERROR)
-        logger.error(f'from [{sender}], {msg}')
-
+    if _DEBUG is False:     # 디버그모드가 켜져있는 경우만 로그 실행
+        return None
     else:
-        logger.setLevel(logging.WARNING)
-        logger.warning(f'from [{sender}], MSGTYPE does not exist')
+        if msgtype == 'debug':
+            logger.setLevel(logging.DEBUG)
+            logger.debug(f'from [{sender}], {msg}')
+
+        elif msgtype == 'info':
+            logger.setLevel(logging.INFO)
+            logger.info(f'from [{sender}], {msg}')
+
+        elif msgtype == 'warning':
+            logger.setLevel(logging.WARNING)
+            logger.warning(f'from [{sender}], {msg}')
+
+        elif msgtype == 'error':
+            logger.setLevel(logging.ERROR)
+            logger.error(f'from [{sender}], {msg}')
+
+        else:
+            logger.setLevel(logging.WARNING)
+            logger.warning(f'from [{sender}], MSGTYPE does not exist')
