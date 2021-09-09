@@ -1,8 +1,8 @@
 import requests
+from requests import Session
 import pandas as pd
 import re
 import lms._settings as settings
-
 import lms.session as session
 from bs4 import BeautifulSoup
 from lms import _LOG as log
@@ -195,9 +195,18 @@ class SubjectInfo(Lecture):
         return pd.DataFrame(return_form)
 
 
-if __name__ == "__main__":
-    login = session.GetSession()
+class AdvancedInfo:
+    def __init__(self, s: requests.Session, hw_info: pd.DataFrame):
+        self.session = s            # 인가받은 세션정보
+        self.hw_info = hw_info      # 여기서 받는건 sq 정보
 
-    lecture = SubjectInfo(login.session, '파이썬프로그래밍(01)', settings.CURRENT)
-    lecture.getLectureList()
-    print(lecture.getHomework())
+    def uploadHomework(self):
+        for col in self.hw_info.columns:
+            print(col)
+
+
+if __name__ == "__main__":
+    login: requests.Session = session.GetSession().session
+    info = SubjectInfo(login, "파이썬프로그래밍(01)", settings.CURRENT)
+    hw = info.getHomework()
+    AdvancedInfo(login, hw).uploadHomework()

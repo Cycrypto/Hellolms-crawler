@@ -60,9 +60,3 @@ class GetUserInfo:
         except Exception as e:
             log('error', 'session.GetUserInfo.getInfo',f'Exception {e}')
             return None
-
-
-if __name__ == "__main__":
-    login = GetSession()
-    info = GetUserInfo(login.session).getInfo()    #아래와같이 사용할것
-    print(info)
