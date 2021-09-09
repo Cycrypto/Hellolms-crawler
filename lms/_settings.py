@@ -34,9 +34,15 @@ FILE_DOWNLOAD_FORM = lambda ud, ky, seq: {
     'encoding': 'UTF-8'
 }
 
+# About Lecture URL #
 INFORM_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/notice_list.acl'
 CLASS_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/online_list_form.acl'
 PLANNER_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/plan_form.acl'
 METERIAL_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/lecture_material_list.acl'
 HOMEWORK_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/report_list.acl'
 TEAMPJ_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/project_list.acl'
+
+# About Calendar URL #
+MAIN_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/main_schedule_view.acl'
+INSERT_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/schedule_insert.acl'
+DELETE_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/schedule_delete.acl'
