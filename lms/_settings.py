@@ -46,3 +46,7 @@ TEAMPJ_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/project_list.acl'
 MAIN_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/main_schedule_view.acl'
 INSERT_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/schedule_insert.acl'
 DELETE_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/schedule_delete.acl'
+
+# About Convenience URl #
+NOTIFICATION_URL = r'http://eclass.kpu.ac.kr/ilos/mp/notification_list.acl'
+NOTIFICATION_COUNT_URL = r'http://eclass.kpu.ac.kr/ilos/co/notification_count.acl'
