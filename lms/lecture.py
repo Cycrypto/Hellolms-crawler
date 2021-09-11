@@ -182,15 +182,21 @@ class SubjectInfo(Lecture):
         html = self.session.get(settings.HOMEWORK_URL)
         soup = BeautifulSoup(html.text, 'html.parser')
         table = soup.find("table").find("tbody").find_all("tr")
-        for t in table:
-            return_form['title'].append(t.find_all("td")[2].find_all("div")[0].get_text().strip())
-            return_form['progress'].append(t.find_all("td")[3].get_text().strip())
-            return_form['issubmit'].append(
-                '제출' if len(t.find_all("td")[4].find_all("img", {'alt': '제출'})) != 0 else '미제출')
-            return_form['score'].append(t.find_all("td")[5].get_text().strip())
-            return_form['distribution'].append(t.find_all("td")[6].get_text().strip())
-            return_form['deadline'].append(t.find_all("td")[7].get_text().strip())
-            return_form['rt_seq'].append(str(re.findall(r'\(([^)]+)', str(t.find_all("td")[2].attrs['onclick']))[0][45:52]))
+        try:
+            for t in table:
+                return_form['title'].append(t.find_all("td")[2].find_all("div")[0].get_text().strip())
+                return_form['progress'].append(t.find_all("td")[3].get_text().strip())
+                return_form['issubmit'].append(
+                    '제출' if len(t.find_all("td")[4].find_all("img", {'alt': '제출'})) != 0 else '미제출')
+                return_form['score'].append(t.find_all("td")[5].get_text().strip())
+                return_form['distribution'].append(t.find_all("td")[6].get_text().strip())
+                return_form['deadline'].append(t.find_all("td")[7].get_text().strip())
+                return_form['rt_seq'].append(
+                    str(re.findall(r'\(([^)]+)', str(t.find_all("td")[2].attrs['onclick']))[0][45:52]))
+
+        except IndexError:
+            log('info', "lecture.getHomework", "과제가 없습니다")
+            return pd.DataFrame()
 
         return pd.DataFrame(return_form)
 
