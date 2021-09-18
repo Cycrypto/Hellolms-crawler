@@ -38,7 +38,7 @@ class GetSession:
 
 
 class GetUserInfo:
-    def __init__(self, session:requests.Session):
+    def __init__(self, session: requests.Session):
         self.session = session
 
     def getInfo(self):
@@ -50,10 +50,8 @@ class GetUserInfo:
             user_name = soup.select_one("#user").text
             user_code = (soup.find("tr", {'style': 'height: 40px; vertical-align: middle;'}).
                          find_all("td")[1].text)[(soup.find("tr", {'style': 'height: 40px; vertical-align: middle;'}).
-                                                  find_all("td")[1].text).find('(') + 1:(soup.find("tr", {
-                'style': 'height: 40px; vertical-align: middle;'}).
-                                                                                         find_all("td")[1].text).find(
-                ')')]  # 학번
+                                                  find_all("td")[1].text).find('(') + 1:(soup.find("tr", {'style': 'height: 40px; vertical-align: middle;'}).
+                                                                                         find_all("td")[1].text).find(')')]  # 학번
 
             return user_name, user_code, user_email
 
