@@ -40,6 +40,10 @@ class Query:
         self._conn.commit()
         self._conn.close()
 
+    @property
+    def cursor(self):
+        return self._cursor
+
 
 if __name__ == "__main__":
     q = Query()
