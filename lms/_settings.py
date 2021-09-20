@@ -47,5 +47,11 @@ MAIN_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/main_schedule_view.acl'
 INSERT_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/schedule_insert.acl'
 DELETE_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/schedule_delete.acl'
 
+
 #About DB Path
 OWN_LOGIN_INFO_DB = r"C:\Users\jh01l\Desktop\Hellolms\__own\LOGIN_INFO.db"
+
+# About Convenience URl #
+NOTIFICATION_URL = r'http://eclass.kpu.ac.kr/ilos/mp/notification_list.acl'
+NOTIFICATION_COUNT_URL = r'http://eclass.kpu.ac.kr/ilos/co/notification_count.acl'
+
