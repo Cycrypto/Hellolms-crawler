@@ -1,35 +1,60 @@
 import requests
 import json
 import pprint
-
+import lms
 from bs4 import BeautifulSoup
 from lms import _LOG as log
 import lms._settings as settings
 
-try:  # JUST FOR DEBUG
-    from __own import Account as acc
+import lms_db.query as db
+lms._DEBUG = False      # 디버그모드 비활성화
 
-except ImportError:
-    pass
+def check_id_exist(path=r"../__own/LOGIN_INFO.db"):
+    q = db.Query(path)
+    query = """SELECT * FROM USER_INFO"""
+    q.cursor.execute(query)
+    length = len(q.cursor.fetchall())
+    if length == 1:
+        return True
+
+    else:
+        return False
+
+
+def get_id(path=r"../__own/LOGIN_INFO.db"):
+    global uid, pw
+    q = db.Query(path)
+    if check_id_exist(path) is True:
+        query = """SELECT ID FROM USER_INFO"""
+        q.cursor.execute(query)
+        uid = q.cursor.fetchone()[0]
+
+        query = """SELECT PW FROM USER_INFO"""
+        q.cursor.execute(query)
+        pw = q.cursor.fetchone()[0]
+    else:
+        uid = pw = None
+    return uid, pw
 
 
 class GetSession:
     def __init__(self):
         self.session = requests.Session()
         log('debug', 'session.GetSession.__init__', f'SESSION ID : {str(id(self.session))}')
-        self._login()
+        self.flag = self._login()
 
     def _login(self) -> bool:
+        uid, pwd = get_id()
         if settings.USER_INFO['usr_id'] is None:     # FOR DEBUG
-            settings.USER_INFO['usr_id'] = acc.UID
+            settings.USER_INFO['usr_id'] = uid
 
         if settings.USER_INFO['usr_pwd'] is None:
-            settings.USER_INFO['usr_pwd'] = acc.PWD
+            settings.USER_INFO['usr_pwd'] = pwd
 
         log('info', 'session.GetSession.__init__', 'login start')
-        res = self.session.post(settings.LOGIN_URL, data=settings.USER_INFO)
+        self.session.post(settings.LOGIN_URL, data=settings.USER_INFO)
 
-        if res.status_code == 200:
+        if GetUserInfo(self.session).getInfo() is not None:
             log('info', 'session.GetSession.__init__', 'login success!')
             return True
         else:
@@ -58,3 +83,8 @@ class GetUserInfo:
         except Exception as e:
             log('error', 'session.GetUserInfo.getInfo',f'Exception {e}')
             return None
+
+
+if __name__ == "__main__":
+    print(GetSession().flag)
+    print(get_id())
