@@ -3,7 +3,7 @@ import sqlite3
 
 
 class Query:
-    def __init__(self, db=settings.DB_PATH):  # 기본적인 데이터베이스 세팅
+    def __init__(self, db):  # 기본적인 데이터베이스 세팅
         self._conn = sqlite3.connect(db)
         self._cursor = self._conn.cursor()  # db 접근 커서 생성
 
