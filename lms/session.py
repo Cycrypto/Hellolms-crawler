@@ -1,3 +1,4 @@
+import os
 import requests
 import json
 import pprint
@@ -7,13 +8,15 @@ from lms import _LOG as log
 import lms._settings as settings
 
 import lms_db.query as db
-lms._DEBUG = False      # 디버그모드 비활성화
+lms._DEBUG = True      # 디버그모드 비활성화
 
-def check_id_exist(path=r"../__own/LOGIN_INFO.db"):
+
+def check_id_exist(path=settings.OWN_LOGIN_INFO_DB):
     q = db.Query(path)
     query = """SELECT * FROM USER_INFO"""
-    q.cursor.execute(query)
-    length = len(q.cursor.fetchall())
+    q._cursor.execute(query)
+    length = len(q._cursor.fetchall())
+    del q
     if length == 1:
         return True
 
@@ -21,27 +24,29 @@ def check_id_exist(path=r"../__own/LOGIN_INFO.db"):
         return False
 
 
-def get_id(path=r"../__own/LOGIN_INFO.db"):
+def get_id(path=settings.OWN_LOGIN_INFO_DB):
     global uid, pw
-    q = db.Query(path)
+    q = db.Query(db=path)
     if check_id_exist(path) is True:
         query = """SELECT ID FROM USER_INFO"""
-        q.cursor.execute(query)
-        uid = q.cursor.fetchone()[0]
+        q._cursor.execute(query)
+        uid = q._cursor.fetchone()[0]
 
         query = """SELECT PW FROM USER_INFO"""
-        q.cursor.execute(query)
-        pw = q.cursor.fetchone()[0]
+        q._cursor.execute(query)
+        pw = q._cursor.fetchone()[0]
     else:
         uid = pw = None
+    del q
     return uid, pw
 
 
 class GetSession:
     def __init__(self):
+        print("a")
         self.session = requests.Session()
         log('debug', 'session.GetSession.__init__', f'SESSION ID : {str(id(self.session))}')
-        self.flag = self._login()
+        self._login()
 
     def _login(self) -> bool:
         uid, pwd = get_id()
@@ -57,6 +62,7 @@ class GetSession:
         if GetUserInfo(self.session).getInfo() is not None:
             log('info', 'session.GetSession.__init__', 'login success!')
             return True
+
         else:
             log('info', 'session.GetSession.__init__', 'login failed..')
             return False
@@ -86,5 +92,5 @@ class GetUserInfo:
 
 
 if __name__ == "__main__":
-    print(GetSession().flag)
-    print(get_id())
+    login = GetSession()
+    # print(GetUserInfo(login).getInfo())

@@ -46,3 +46,6 @@ TEAMPJ_URL = r'http://eclass.kpu.ac.kr/ilos/st/course/project_list.acl'
 MAIN_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/main_schedule_view.acl'
 INSERT_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/schedule_insert.acl'
 DELETE_SCHEDULE_URL = r'http://eclass.kpu.ac.kr/ilos/main/schedule_delete.acl'
+
+#About DB Path
+OWN_LOGIN_INFO_DB = r"C:\Users\jh01l\Desktop\Hellolms\__own\LOGIN_INFO.db"
