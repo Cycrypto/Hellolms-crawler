@@ -95,5 +95,5 @@ if __name__ == "__main__":
     calendar.date = '2021-09-09'
     calendar.time = '21:19'
 
-    # calendar.insertSchedule("test", "test content")
-    calendar.deleteSchedule(0)
+    calendar.insertSchedule("test", "test content")
+    # calendar.deleteSchedule(0)
