@@ -67,7 +67,11 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QTableView" name="tableView"/>
+           <widget class="QTableWidget" name="tableWidget">
+            <property name="sizeAdjustPolicy">
+             <enum>QAbstractScrollArea::AdjustToContents</enum>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -77,7 +81,7 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QTableView" name="tableView_2"/>
+           <widget class="QTableWidget" name="tableWidget_2"/>
           </item>
          </layout>
         </widget>
@@ -87,7 +91,7 @@
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QTableView" name="tableView_3"/>
+           <widget class="QTableWidget" name="tableWidget_3"/>
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox">
@@ -104,7 +108,7 @@
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QTableView" name="tableView_4"/>
+           <widget class="QTableWidget" name="tableWidget_4"/>
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_2">
@@ -134,7 +138,7 @@
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
